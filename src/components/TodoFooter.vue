@@ -1,14 +1,26 @@
 <template>
-  <div>footer</div>
+  <footer>
+    <span v-on:click="ClearAll">
+      Clear All
+    </span>
+  </footer>
 </template>
 
 <script>
 export default {
     name: 'TodoFooter',
 
+    methods: {
+      ClearAll() {
+        localStorage.clear();
+      }
+    },
 }
 </script>
 
-<style>
+<style scoped>
+span {
+  cursor: pointer;
+}
 
 </style>
