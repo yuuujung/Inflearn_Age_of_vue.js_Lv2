@@ -4,28 +4,47 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus"></i>
     </span>
+
+    <modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">
+        경고!
+        <i class="closeModalBtn fa-solid fa-xmark" @click="showModal = false"></i>
+      </h3>
+      <p slot="body">
+        아무것도 입력하지 않으셨습니다.
+      </p>
+    </modal>
   </div>
 </template>
 
 <script>
+import Modal from'./common/Modal.vue'
+
 export default {
     name: 'TodoInput',
+
     data() {
       return {
         newTodoItem: "",
+        showModal: false
       }
     },
     methods: {
       addTodo() {
         if (this.newTodoItem !== '') {
-        var obj = {completed: false, item: this.newTodoItem};
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
-        this.clearTodo()
+        // this.$emit('addTodoItem', this.newTodoItem);
+        this.$store.commit('addOneItem', this.newTodoItem);
+        this.clearInput();
+        } else {
+          this.showModal = !this.showModal
         }
       },
-      clearTodo() {
+      clearInput() {
         this.newTodoItem = '';
       }
+    },
+    components: {
+      Modal,
     }
 
 }

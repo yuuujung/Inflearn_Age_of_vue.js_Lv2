@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-<TodoHeader />
-<TodoInput />
-<TodoList />
-<TodoFooter />
+    <TodoHeader />
+    <TodoInput />
+    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem" />
+    <TodoFooter v-on:clearAll="clearAllItems" />
 
   </div>
 </template>
